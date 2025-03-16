@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: sahl-api-sandbox
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: API_URL
+        value: https://sahl-bank-api.onrender.com
+    autoDeploy: true

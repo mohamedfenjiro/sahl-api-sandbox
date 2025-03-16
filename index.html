@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Sahl API Sandbox</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Test Sahl API Sandbox</h1>
+            <p>Test the Sahl API with this interactive sandbox</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="auth-section">
+            <h2>Authentication</h2>
+            <div class="form-group">
+                <label for="client-id">Client ID:</label>
+                <input type="text" id="client-id" value="client_123456">
+            </div>
+            <div class="form-group">
+                <label for="client-secret">Client Secret:</label>
+                <input type="text" id="client-secret" value="secret_abcdef123456">
+            </div>
+            <div class="form-group">
+                <label for="api-url">API URL:</label>
+                <input type="text" id="api-url" value="http://localhost:8000">
+                <small>Using the hosted API URL. You can change this if needed.</small>
+            </div>
+        </section>
+
+        <section class="endpoints-section">
+            <h2>API Endpoints</h2>
+            
+            <div class="endpoint-tabs">
+                <button class="tab-button active" data-tab="info">Bank Info</button>
+                <button class="tab-button" data-tab="link-token">Link Token</button>
+                <button class="tab-button" data-tab="exchange-token">Exchange Token</button>
+                <button class="tab-button" data-tab="auth">Auth</button>
+                <button class="tab-button" data-tab="transactions">Transactions</button>
+                <button class="tab-button" data-tab="statements">Statements</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Bank Info Tab -->
+                <div class="tab-pane active" id="info">
+                    <h3>Bank Info</h3>
+                    <p>Get information about the Sahl API.</p>
+                    <div class="endpoint-details">
+                        <code>GET /bank/info</code>
+                        <button class="send-button" data-endpoint="info">Send Request</button>
+                    </div>
+                </div>
+
+                <!-- Link Token Tab -->
+                <div class="tab-pane" id="link-token">
+                    <h3>Create Link Token</h3>
+                    <p>Create a link token for client-side initialization.</p>
+                    <div class="form-group">
+                        <label for="link-user-id">User ID:</label>
+                        <input type="text" id="link-user-id" value="username1234">
+                    </div>
+                    <div class="form-group">
+                        <label for="link-client-name">Client Name:</label>
+                        <input type="text" id="link-client-name" value="Test App">
+                    </div>
+                    <div class="form-group">
+                        <label for="link-products">Products:</label>
+                        <input type="text" id="link-products" value="auth">
+                        <small>Comma-separated list: auth, transactions, statements</small>
+                    </div>
+                    <div class="endpoint-details">
+                        <code>POST /bank/link/token/create</code>
+                        <button class="send-button" data-endpoint="link-token">Send Request</button>
+                    </div>
+                </div>
+
+                <!-- Exchange Token Tab -->
+                <div class="tab-pane" id="exchange-token">
+                    <h3>Exchange Public Token</h3>
+                    <p>Exchange a public token for an access token.</p>
+                    <div class="form-group">
+                        <label for="public-token">Public Token:</label>
+                        <input type="text" id="public-token" value="public-token-123">
+                    </div>
+                    <div class="endpoint-details">
+                        <code>POST /bank/item/public_token/exchange</code>
+                        <button class="send-button" data-endpoint="exchange-token">Send Request</button>
+                    </div>
+                </div>
+
+                <!-- Auth Tab -->
+                <div class="tab-pane" id="auth">
+                    <h3>Auth</h3>
+                    <p>Get account and routing numbers.</p>
+                    <div class="form-group">
+                        <label for="auth-access-token">Access Token:</label>
+                        <input type="text" id="auth-access-token" value="access-token-1">
+                    </div>
+                    <div class="endpoint-details">
+                        <code>POST /bank/auth/get</code>
+                        <button class="send-button" data-endpoint="auth">Send Request</button>
+                    </div>
+                </div>
+
+                <!-- Transactions Tab -->
+                <div class="tab-pane" id="transactions">
+                    <h3>Transactions</h3>
+                    <p>Get transaction data.</p>
+                    <div class="form-group">
+                        <label for="transactions-access-token">Access Token:</label>
+                        <input type="text" id="transactions-access-token" value="access-token-1">
+                    </div>
+                    <div class="form-group">
+                        <label for="start-date">Start Date:</label>
+                        <input type="date" id="start-date" value="2025-02-15">
+                    </div>
+                    <div class="form-group">
+                        <label for="end-date">End Date:</label>
+                        <input type="date" id="end-date" value="2025-03-15">
+                    </div>
+                    <div class="endpoint-details">
+                        <code>POST /bank/transactions/get</code>
+                        <button class="send-button" data-endpoint="transactions">Send Request</button>
+                    </div>
+                </div>
+
+                <!-- Statements Tab -->
+                <div class="tab-pane" id="statements">
+                    <h3>Statements</h3>
+                    <p>Get statement data.</p>
+                    <div class="form-group">
+                        <label for="statements-access-token">Access Token:</label>
+                        <input type="text" id="statements-access-token" value="access-token-1">
+                    </div>
+                    <div class="endpoint-details">
+                        <code>POST /bank/statements/get</code>
+                        <button class="send-button" data-endpoint="statements">Send Request</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="response-section">
+            <h2>Response</h2>
+            <div class="response-container">
+                <div class="response-header">
+                    <span class="status-code"></span>
+                    <span class="response-time"></span>
+                </div>
+                <pre class="response-body">Send a request to see the response here.</pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sahl Financial. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
