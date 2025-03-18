@@ -1,0 +1,16 @@
+{
+  "name": "sahl-api-sandbox-new",
+  "version": "1.0.0",
+  "description": "This repository contains the Sahl API Sandbox, an interactive web interface for testing the Sahl Bank API without writing code.",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  }
+}

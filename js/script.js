@@ -48,10 +48,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Content-Type': 'application/json'
                 };
                 
+                // Use the proxy URL instead of the direct API URL
+                const proxyUrl = '/api';
+                
                 // Handle different endpoints
                 switch(endpoint) {
                     case 'info':
-                        response = await fetch(`${apiUrl}/bank/info`, {
+                        response = await fetch(`${proxyUrl}/bank/info`, {
                             method: 'GET',
                             headers: headers
                         });
@@ -62,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const clientName = document.getElementById('link-client-name').value;
                         const products = document.getElementById('link-products').value.split(',').map(p => p.trim());
                         
-                        response = await fetch(`${apiUrl}/bank/link/token/create`, {
+                        response = await fetch(`${proxyUrl}/bank/link/token/create`, {
                             method: 'POST',
                             headers: headers,
                             body: JSON.stringify({
@@ -78,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     case 'exchange-token':
                         const publicToken = document.getElementById('public-token').value;
                         
-                        response = await fetch(`${apiUrl}/bank/item/public_token/exchange`, {
+                        response = await fetch(`${proxyUrl}/bank/item/public_token/exchange`, {
                             method: 'POST',
                             headers: headers,
                             body: JSON.stringify({
@@ -90,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     case 'auth':
                         const authAccessToken = document.getElementById('auth-access-token').value;
                         
-                        response = await fetch(`${apiUrl}/bank/auth/get`, {
+                        response = await fetch(`${proxyUrl}/bank/auth/get`, {
                             method: 'POST',
                             headers: headers,
                             body: JSON.stringify({
@@ -104,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const startDate = document.getElementById('start-date').value;
                         const endDate = document.getElementById('end-date').value;
                         
-                        response = await fetch(`${apiUrl}/bank/transactions/get`, {
+                        response = await fetch(`${proxyUrl}/bank/transactions/get`, {
                             method: 'POST',
                             headers: headers,
                             body: JSON.stringify({
@@ -118,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     case 'statements':
                         const statementsAccessToken = document.getElementById('statements-access-token').value;
                         
-                        response = await fetch(`${apiUrl}/bank/statements/get`, {
+                        response = await fetch(`${proxyUrl}/bank/statements/get`, {
                             method: 'POST',
                             headers: headers,
                             body: JSON.stringify({
@@ -195,14 +198,13 @@ document.addEventListener('DOMContentLoaded', function() {
                                     
                                     // Use the same access token that was used to fetch the statements
                                     const accessToken = document.getElementById('statements-access-token').value;
-                                    const apiUrl = document.getElementById('api-url').value;
                                     const clientId = document.getElementById('client-id').value;
                                     const clientSecret = document.getElementById('client-secret').value;
                                     
                                     console.log(`Fetching PDF directly from API using access token: ${accessToken}`);
                                     
                                     // Fetch the PDF directly from the API with the access token
-                                    const response = await fetch(`${apiUrl}/bank/statements/pdf`, {
+                                    const response = await fetch(`${proxyUrl}/bank/statements/pdf`, {
                                         method: 'POST',
                                         headers: {
                                             'X-Client-ID': clientId,
